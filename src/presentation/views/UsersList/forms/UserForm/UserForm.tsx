@@ -9,6 +9,7 @@ import AvatarInput from "../../../../components/FormControls/AvatarInput";
 import User from "../../../../../domain/entity/User/structure/User";
 import {useFormik} from "formik";
 import {newUserValidationSchema, updateUserValidationSchema} from "./userValidationSchema";
+import {preventEnterPress} from "../../../../utils/helpers";
 
 type Props = {
     user: User
@@ -23,7 +24,7 @@ const UserForm: React.FC<Props> = ({user, formId, isLoadingForm, onSaveUser}) =>
         onSubmit: onSaveUser,
         validateOnChange: false,
         validateOnBlur: false,
-        validationSchema: user.id === '' ? newUserValidationSchema : updateUserValidationSchema
+        validationSchema: user.id === null ? newUserValidationSchema : updateUserValidationSchema
     });
 
     const _handleChange = (e: React.ChangeEvent<any>) => {
@@ -42,7 +43,7 @@ const UserForm: React.FC<Props> = ({user, formId, isLoadingForm, onSaveUser}) =>
     }
 
     return (
-        <form id={formId} onSubmit={handleSubmit}>
+        <form id={formId} onKeyDown={preventEnterPress} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <AvatarInput
