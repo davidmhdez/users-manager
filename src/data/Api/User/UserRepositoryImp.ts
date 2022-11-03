@@ -34,7 +34,7 @@ export default class UserRepositoryImp implements UserRepository{
 
     async getUsers(page: number, perPage: number): Promise<User[]> {
         const params: string[] = [];
-        page && params.push(`page=${page}`);
+        page && params.push(`page=${page - 1}`);
         perPage && params.push(`size=${perPage}`);
         const queryParams = params.length > 0 ? `?${params.join('&')}` : '';
 

@@ -32,6 +32,7 @@ const UsersListContainer = () => {
             ? await updateUserUC.updateUser(user)
             : await createUserUC.createUser(user)
         setSelectedUser(null)
+        pagination.refresh()
     }
 
     // delete user actions
@@ -41,7 +42,7 @@ const UsersListContainer = () => {
     const handleDeleteUser: (userId: number) => Promise<void> = async (userId) =>{
         await deleteUserUC.deleteUser(userId);
         setSelectedDeleteUserId(null);
-        pagination.refresh('deleteItem')
+        pagination.refresh('deleteItem');
     }
 
     return (
